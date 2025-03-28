@@ -4,15 +4,11 @@ format: html
 editor: visual
 ---
 
-
-
 ## Quarto
 
 ## Running Code
 
 Review Seurat
-
-
 
 ```{r}
 library(ggplot2)
@@ -20,11 +16,7 @@ library(Seurat)
 library(SingleCellExperiment)
 ```
 
-
-
 [Nature](https://www.nature.com/articles/s41591-023-02345-0https://www.nature.com/articles/s41591-023-02345-0)
-
-
 
 ```{r}
 
@@ -57,11 +49,7 @@ seurat_obj <- RunUMAP(norm, dims = 1:20)
 DimPlot(seurat_obj, reduction = "umap")
 ```
 
-
-
 The `echo: false` option disables the printing of code (only output is displayed).
-
-
 
 ```{r}
 DimPlot(seurat_obj, reduction = "umap", group.by = "ident", label = TRUE, pt.size = 1) + 
@@ -71,4 +59,3 @@ DimPlot(seurat_obj, reduction = "umap", group.by = "ident", label = TRUE, pt.siz
 ```{r}
 ElbowPlot(seurat_obj, ndims = 50)
 ```
-
