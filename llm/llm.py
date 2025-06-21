@@ -2,6 +2,8 @@ import streamlit as st
 from llama_cpp import Llama
 import os
 import re
+import requests
+import json
 
 # Configure the page
 st.set_page_config(
@@ -9,6 +11,10 @@ st.set_page_config(
     page_icon="🏥",
     layout="centered"
 )
+
+# SNOMED CT API configuration
+SNOMED_API_BASE = "https://browser.ihtsdotools.org/snowstorm/snomed-ct"
+SNOMED_API_KEY = st.secrets["SNOMED_API_KEY"]  # Store this securely in Streamlit secrets
 
 # Medical system prompt
 MEDICAL_SYSTEM_PROMPT = """You are a medical AI assistant. Please:
@@ -20,6 +26,40 @@ MEDICAL_SYSTEM_PROMPT = """You are a medical AI assistant. Please:
 6. Always recommend consulting healthcare professionals for specific medical advice
 
 Remember: This is for informational purposes only and not a substitute for professional medical advice."""
+
+def get_snomed_concepts(query):
+    """Query SNOMED CT API for relevant medical concepts"""
+    headers = {
+        "Accept": "application/json",
+        "Accept-Language": "en",
+        "Authorization": f"Bearer {SNOMED_API_KEY}"
+    }
+    
+    params = {
+        "term": query,
+        "limit": 10,
+        "offset": 0,
+        "searchMode": "STANDARD"
+    }
+    
+    try:
+        response = requests.get(
+            f"{SNOMED_API_BASE}/browser/MAIN/descriptions",
+            headers=headers,
+            params=params
+        )
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        st.warning(f"Error querying SNOMED CT: {str(e)}")
+        return None
+
+def validate_medical_context(text):
+    """Validate if the text contains medical concepts using SNOMED CT"""
+    concepts = get_snomed_concepts(text)
+    if concepts and concepts.get("items"):
+        return True, concepts["items"]
+    return False, []
 
 # Initialize the model
 @st.cache_resource
@@ -64,15 +104,16 @@ if user_input:
     if not user_input.strip():
         st.warning("Please enter a medical question!")
     else:
-        # Basic medical context validation
-        medical_keywords = ['symptom', 'diagnosis', 'treatment', 'disease', 'condition', 
-                          'medicine', 'drug', 'patient', 'doctor', 'hospital', 'medical',
-                          'health', 'illness', 'pain', 'therapy', 'clinical']
+        # Validate medical context using SNOMED CT
+        is_medical, medical_concepts = validate_medical_context(user_input)
         
-        has_medical_context = any(keyword in user_input.lower() for keyword in medical_keywords)
-        
-        if not has_medical_context:
+        if not is_medical:
             st.warning("Your question might not be medical-related. Please ensure you're asking about medical topics.")
+        else:
+            # Display relevant medical concepts
+            st.info("Identified medical concepts:")
+            for concept in medical_concepts:
+                st.write(f"- {concept['term']} (SNOMED CT ID: {concept['conceptId']})")
         
         with st.spinner("Analyzing your medical question..."):
             try:
@@ -99,5 +140,3 @@ if user_input:
                 
             except Exception as e:
                 st.error(f"An error occurred: {str(e)}")
-
-
