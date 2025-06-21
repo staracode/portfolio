@@ -7,10 +7,10 @@ A comprehensive portfolio showcasing various data science, machine learning, and
 ```
 portfolio/
 ├── llm/                 # Medical AI Assistant with SNOMED CT integration
-├── genomics/            # Single-cell RNA sequencing analysis
-├── stats/               # Statistical modeling and GLM examples
 ├── ML/                  # Machine learning implementations
+├── stats/               # Statistical modeling and GLM examples
 ├── algos/               # Algorithm implementations and optimizations
+├── genomics/            # Single-cell RNA sequencing analysis
 └── README.md           # This file
 ```
 
@@ -19,7 +19,7 @@ portfolio/
 ### Prerequisites
 
 - Python 3.8+
-- R 4.0+
+- R 4.0+ (optional, for statistical analysis)
 - Streamlit
 - PyTorch
 - Required Python packages (see installation section)
@@ -37,9 +37,9 @@ cd portfolio
 pip install streamlit torch torchvision requests
 ```
 
-3. Install R packages (if using R components):
+3. Install R packages (optional, for statistical analysis):
 ```r
-install.packages(c("ggplot2", "Seurat", "SingleCellExperiment"))
+install.packages(c("ggplot2", "rmarkdown", "knitr"))
 ```
 
 ## 📁 Project Components
@@ -67,20 +67,17 @@ streamlit run llm.py
 SNOMED_API_KEY = "your-api-key-here"
 ```
 
-### 🧬 Genomics Analysis (`genomics/`)
+### 🤖 Machine Learning (`ML/`)
 
-Single-cell RNA sequencing analysis using Seurat and SingleCellExperiment packages.
+Machine learning implementations and examples.
 
 **Features:**
-- Single-cell data processing and normalization
-- Dimensionality reduction (PCA, UMAP)
-- Cell clustering and visualization
-- Interactive HTML reports
+- MNIST digit classification with PyTorch
+- Neural network architecture demonstration
+- Training and evaluation pipelines
 
 **Files:**
-- `singlecell.qmd` - Quarto document with analysis
-- `singlecell.html` - Generated HTML report
-- `bam/` - BAM file storage (if applicable)
+- `MNIST.py` - Complete MNIST classification pipeline
 
 ### 📊 Statistical Modeling (`stats/`)
 
@@ -95,18 +92,6 @@ Statistical analysis examples including Generalized Linear Models (GLM).
 - `glm.qmd` - Quarto document with GLM analysis
 - `glm.html` - Generated HTML report
 
-### 🤖 Machine Learning (`ML/`)
-
-Machine learning implementations and examples.
-
-**Features:**
-- MNIST digit classification with PyTorch
-- Neural network architecture demonstration
-- Training and evaluation pipelines
-
-**Files:**
-- `MNIST.py` - Complete MNIST classification pipeline
-
 ### ⚡ Algorithms (`algos/`)
 
 Algorithm implementations with performance optimizations.
@@ -119,18 +104,23 @@ Algorithm implementations with performance optimizations.
 **Files:**
 - `fib.py` - Four different Fibonacci implementations
 
+### 🧬 Genomics Analysis (`genomics/`)
+
+Single-cell RNA sequencing analysis examples.
+
+**Files:**
+- `singlecell.qmd` - Quarto document with analysis
+- `singlecell.html` - Generated HTML report
+
 ## 🛠️ Technologies Used
 
 ### Python
 - **Streamlit** - Web application framework
 - **PyTorch** - Deep learning framework
 - **Requests** - HTTP library for API calls
-- **NumPy/Pandas** - Data manipulation
 
-### R
+### R (Optional)
 - **ggplot2** - Data visualization
-- **Seurat** - Single-cell analysis
-- **SingleCellExperiment** - Bioconductor package
 - **Quarto** - Scientific and technical publishing
 
 ### APIs & Services
@@ -145,23 +135,17 @@ Algorithm implementations with performance optimizations.
 - ✅ Professional safety disclaimers
 - ✅ Interactive web interface
 
-### Single-cell Analysis
-- ✅ Data preprocessing and quality control
-- ✅ Dimensionality reduction (PCA, UMAP)
-- ✅ Cell clustering and visualization
-- ✅ Interactive HTML reports
+### Machine Learning
+- ✅ MNIST digit classification
+- ✅ Neural network implementation
+- ✅ Training and evaluation pipelines
+- ✅ GPU acceleration support
 
 ### Statistical Modeling
 - ✅ Generalized Linear Models (GLM)
 - ✅ Logistic regression examples
 - ✅ Data visualization
 - ✅ Model diagnostics
-
-### Machine Learning
-- ✅ MNIST digit classification
-- ✅ Neural network implementation
-- ✅ Training and evaluation pipelines
-- ✅ GPU acceleration support
 
 ### Algorithms
 - ✅ Multiple Fibonacci implementations
@@ -177,16 +161,13 @@ Algorithm implementations with performance optimizations.
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+pip install streamlit torch torchvision requests
 ```
 
-2. **R Environment:**
+2. **R Environment (Optional):**
 ```r
 # Install required packages
 install.packages(c("ggplot2", "rmarkdown", "knitr"))
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-BiocManager::install(c("Seurat", "SingleCellExperiment"))
 ```
 
 ### API Configuration
@@ -248,7 +229,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [IHTSDO](https://www.ihtsdo.org/) for SNOMED CT terminology
-- [Seurat](https://satijalab.org/seurat/) for single-cell analysis tools
 - [PyTorch](https://pytorch.org/) for deep learning framework
 - [Streamlit](https://streamlit.io/) for web application framework
 
