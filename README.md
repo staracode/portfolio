@@ -1,6 +1,6 @@
 # Data Science & AI Portfolio
 
-A comprehensive portfolio showcasing various data science, machine learning, and AI projects using Python and R.
+A portfolio showcasing various data science, machine learning, and AI projects using Python and R. I used this repository to quickly explore new ideas and tools as I hear about them and. 
 
 ## 🏗️ Project Structure
 
