@@ -205,9 +205,9 @@ def load_model():
     try:
         return Llama(
             model_path="capybarahermes-2.5-mistral-7b.Q4_K_M.gguf",
-            temperature=0.3,
-            max_tokens=512,
-            top_p=0.9,
+            temperature=0.3,  # Lower temperature for more precise responses
+            max_tokens=512,   # Increased for more detailed medical explanations
+            top_p=0.9,        # Slightly reduced for more focused responses
             n_ctx=2048,
             verbose=True,
         )
