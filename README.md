@@ -6,7 +6,7 @@ A portfolio showcasing various data science, machine learning, and AI projects u
 
 ```
 portfolio/
-├── llm/                 # Medical AI Assistant with SNOMED CT integration
+├── llm/                 # Medical AI Assistant with HPO integration
 ├── ML/                  # Machine learning implementations
 ├── stats/               # Statistical modeling and GLM examples
 ├── algos/               # Algorithm implementations and optimizations
@@ -46,25 +46,20 @@ install.packages(c("ggplot2", "rmarkdown", "knitr"))
 
 ### 🤖 Medical AI Assistant (`llm/`)
 
-A Streamlit-based medical AI assistant that uses SNOMED CT (Systematized Nomenclature of Medicine) for accurate medical concept identification and filtering.
+A Streamlit-based medical AI assistant that uses HPO (Human Phenotype Ontology) via SPARQL queries and comprehensive medical keyword validation for accurate medical concept identification and filtering.
 
 **Features:**
 - Medical question answering with evidence-based responses
-- SNOMED CT integration for medical concept validation
+- HPO ontology integration via SPARQL endpoint
+- Medical keyword validation across symptoms, conditions, body parts, and treatments
 - Professional medical disclaimers and safety warnings
-- Interactive web interface
+- Interactive web interface with detailed term information
+- Hybrid approach: HPO ontology + fallback keyword matching
 
 **To run:**
 ```bash
 cd llm
 streamlit run llm.py
-```
-
-**Setup:**
-- Requires SNOMED CT API key (sign up at [IHTSDO](https://www.ihtsdo.org/))
-- Store API key in `.streamlit/secrets.toml`:
-```toml
-SNOMED_API_KEY = "your-api-key-here"
 ```
 
 ### 🤖 Machine Learning (`ML/`)
@@ -94,7 +89,7 @@ Statistical analysis examples including Generalized Linear Models (GLM).
 
 ### ⚡ Algorithms (`algos/`)
 
-Algorithm implementations with performance optimizations.
+Algorithm implementations and performance optimizations.
 
 **Features:**
 - Multiple Fibonacci sequence implementations
@@ -124,16 +119,18 @@ Single-cell RNA sequencing analysis examples.
 - **Quarto** - Scientific and technical publishing
 
 ### APIs & Services
-- **SNOMED CT API** - Medical terminology standards
-- **IHTSDO** - International Health Terminology Standards
+- **HPO SPARQL Endpoint** - Human Phenotype Ontology queries
+- **SPARQL** - Semantic query language for ontologies
 
 ## 📈 Key Features
 
 ### Medical AI Assistant
-- ✅ SNOMED CT integration for medical concept validation
+- ✅ HPO ontology integration via SPARQL
+- ✅ Medical keyword validation across multiple categories
 - ✅ Evidence-based medical responses
 - ✅ Professional safety disclaimers
-- ✅ Interactive web interface
+- ✅ Interactive web interface with detailed term information
+- ✅ Hybrid approach for comprehensive coverage
 
 ### Machine Learning
 - ✅ MNIST digit classification
@@ -168,16 +165,6 @@ pip install streamlit torch torchvision requests
 ```r
 # Install required packages
 install.packages(c("ggplot2", "rmarkdown", "knitr"))
-```
-
-### API Configuration
-
-For the Medical AI Assistant, you'll need to:
-
-1. Sign up for SNOMED CT API access at [IHTSDO](https://www.ihtsdo.org/)
-2. Create a `.streamlit/secrets.toml` file:
-```toml
-SNOMED_API_KEY = "your-api-key-here"
 ```
 
 ## 🚀 Usage Examples
@@ -228,7 +215,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [IHTSDO](https://www.ihtsdo.org/) for SNOMED CT terminology
+- [HPO](https://hpo.jax.org/) for Human Phenotype Ontology
+- [JAX](https://www.jax.org/) for maintaining the HPO database
 - [PyTorch](https://pytorch.org/) for deep learning framework
 - [Streamlit](https://streamlit.io/) for web application framework
 
